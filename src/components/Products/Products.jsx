@@ -1,50 +1,96 @@
 import React from "react";
-import Img1 from "../../assets/women/women.png";
-import Img2 from "../../assets/women/women2.jpg";
-import Img3 from "../../assets/women/women3.jpg";
-import Img4 from "../../assets/women/women4.jpg";
-import { FaStar } from "react-icons/fa6";
+import Img1 from "../../assets/categories/womenEthnic.jpg";
+import Img2 from "../../assets/categories/womenWestern.jpg";
+import Img3 from "../../assets/categories/HomeAppliances.jpg";
+import Img4 from "../../assets/categories/decoritems.jpg";
+import Img5 from "../../assets/categories/makeup.jpg";
+import Img6 from "../../assets/categories/agriculture.jpg";
+import Img7 from "../../assets/categories/automotive.jpg";
+import Img8 from "../../assets/categories/electronics.jpg";
+import Img9 from "../../assets/categories/foodsAndBeverages.jpg";
+import Img10 from "../../assets/categories/grocery.png";
+import Img11 from "../../assets/categories/stationary.jpg";
+import Img12 from "../../assets/categories/toys.jpg";
+import Img13 from "../../assets/categories/health.png";
 
 const ProductsData = [
   {
     id: 1,
     img: Img1,
     title: "Women Ethnic",
-    rating: 5.0,
-    color: "white",
     aosDelay: "0",
   },
   {
     id: 2,
     img: Img2,
-    title: "Women western",
-    rating: 4.5,
-    color: "Red",
+    title: "Women Western",
     aosDelay: "200",
   },
   {
     id: 3,
     img: Img3,
-    title: "Goggles",
-    rating: 4.7,
-    color: "brown",
+    title: "Home Appliances",
     aosDelay: "400",
   },
   {
     id: 4,
     img: Img4,
-    title: "Printed T-Shirt",
-    rating: 4.4,
-    color: "Yellow",
+    title: "Home Decor",
     aosDelay: "600",
   },
   {
     id: 5,
-    img: Img2,
-    title: "Fashin T-Shirt",
-    rating: 4.5,
-    color: "Pink",
+    img: Img5,
+    title: "Makeup & Skincare",
     aosDelay: "800",
+  },
+  {
+    id: 6,
+    img: Img6,
+    title: "Agricultural Products",
+    aosDelay: "1000",
+  },
+  {
+    id: 7,
+    img: Img7,
+    title: "Auto Components And accessories",
+    aosDelay: "1000",
+  },
+  {
+    id: 8,
+    img: Img8,
+    title: "Electronics",
+    aosDelay: "1000",
+  },
+  {
+    id: 9,
+    img: Img9,
+    title: "Food and Beverages",
+    aosDelay: "1000",
+  },
+  {
+    id: 10,
+    img: Img10,
+    title: "Grocery",
+    aosDelay: "1000",
+  },
+  {
+    id: 11,
+    img: Img11,
+    title: "Books & Stationary",
+    aosDelay: "1000",
+  },
+  {
+    id: 12,
+    img: Img12,
+    title: "Toys & Games",
+    aosDelay: "1000",
+  },
+  {
+    id: 13,
+    img: Img13,
+    title: "Health & wellness",
+    aosDelay: "1000",
   },
 ];
 
@@ -55,50 +101,38 @@ const Products = () => {
         {/* Header section */}
         <div className="text-center mb-10 max-w-[600px] mx-auto">
           <p data-aos="fade-up" className="text-sm text-primary">
-            Top Selling Products for you
+            Major Categories curated for you
           </p>
           <h1 data-aos="fade-up" className="text-3xl font-bold">
-            Products
+            Categories
           </h1>
           <p data-aos="fade-up" className="text-xs text-gray-400">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit
-            asperiores modi Sit asperiores modi
+            Shopsy provides a wide range of products from daily trendy outfits
+            to smart devices, luxury items, etc.
           </p>
         </div>
-        {/* Body section */}
-        <div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5">
-            {/* card section */}
+
+        {/* Horizontal Scrollable Categories */}
+        <div className="relative">
+          <div className="flex gap-5 overflow-x-auto scrollbar-hide px-4 pb-4">
             {ProductsData.map((data) => (
               <div
+                key={data.id}
                 data-aos="fade-up"
                 data-aos-delay={data.aosDelay}
-                key={data.id}
-                className="space-y-3"
+                className="flex flex-col items-center space-y-2 min-w-[150px]"
               >
                 <img
                   src={data.img}
-                  alt=""
-                  className="h-[220px] w-[150px] object-cover rounded-md"
+                  alt={data.title}
+                  className="h-[200px] w-[150px] object-cover rounded-md"
                 />
-                <div>
-                  <h3 className="font-semibold">{data.title}</h3>
-                  <p className="text-sm text-gray-600">{data.color}</p>
-                  <div className="flex items-center gap-1">
-                    <FaStar className="text-yellow-400" />
-                    <span>{data.rating}</span>
-                  </div>
-                </div>
+                <h3 className="text-sm font-semibold">{data.title}</h3>
               </div>
             ))}
           </div>
-          {/* view all button */}
-          <div className="flex justify-center">
-            <button className="text-center mt-10 cursor-pointer bg-primary text-white py-1 px-5 rounded-md">
-              View All Button
-            </button>
-          </div>
         </div>
+        
       </div>
     </div>
   );

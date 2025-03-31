@@ -18,7 +18,7 @@ const BannerImg = {
   width: "100%",
 };
 
-const FooterLinks = [
+const FooterImportantLinks = [
   {
     title: "Home",
     link: "/#",
@@ -37,11 +37,30 @@ const FooterLinks = [
   },
 ];
 
+const FooterLinks = [
+  {
+    title: "All",
+    link: "/#",
+  },
+  {
+    title: "Kids Wear",
+    link: "/#about",
+  },
+  {
+    title: "Electronics",
+    link: "/#contact",
+  },
+  {
+    title: "Mens Wear",
+    link: "/#blog",
+  },
+];
+
 const Footer = () => {
   return (
     <div style={BannerImg} className="text-white">
       <div className="container">
-        <div data-aos="zoom-in" className="grid md:grid-cols-3 pb-44 pt-5">
+        <div className="grid md:grid-cols-3 pb-44 pt-5">
           {/* company details */}
           <div className="py-8 px-4">
             <h1 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
@@ -64,7 +83,7 @@ const Footer = () => {
                 <ul className="flex flex-col gap-3">
                   {FooterLinks.map((link) => (
                     <li
-                      className="cursor-pointer hover:text-primary hover:translate-x-1 duration-300 text-gray-200"
+                      className="cursor-pointer hover:text-primary text-gray-200"
                       key={link.title}
                     >
                       <span>{link.title}</span>
@@ -81,7 +100,7 @@ const Footer = () => {
                 <ul className="flex flex-col gap-3">
                   {FooterLinks.map((link) => (
                     <li
-                      className="cursor-pointer hover:text-primary hover:translate-x-1 duration-300 text-gray-200"
+                      className="cursor-pointer hover:text-primary text-gray-200"
                       key={link.title}
                     >
                       <span>{link.title}</span>
