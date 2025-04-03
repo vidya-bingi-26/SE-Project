@@ -1,12 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function Filter() {
-  const [filters, setFilters] = useState({
-    categories: [],
-    price: 1000,
-    rating: 0,
-  });
-
+function Filter({ filters, setFilters }) {
   const handleCheckboxChange = (category) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -30,7 +24,7 @@ function Filter() {
   const handleRatingChange = (rating) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      rating: prevFilters.rating === rating ? 0 : rating, // Fixed toggle logic
+      rating: prevFilters.rating === rating ? 0 : rating,
     }));
   };
 
@@ -38,12 +32,12 @@ function Filter() {
     <div className="w-64 p-4 bg-white border-r border-gray-200 shadow-md h-full">
       <div className="flex justify-between">
         <h2 className="text-lg font-bold mb-4">Filters</h2>
-        <h4
+        <button
           className="text-red-500 hover:text-red-700 hover:underline"
           onClick={handleClearFilters}
         >
           Clear All
-        </h4>
+        </button>
       </div>
 
       {/* Category Filter */}

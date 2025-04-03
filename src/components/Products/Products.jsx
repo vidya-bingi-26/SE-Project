@@ -114,7 +114,7 @@ const Products = () => {
 
         {/* Horizontal Scrollable Categories */}
         <div className="relative">
-          <div className="flex gap-5 overflow-x-auto scrollbar-hide px-4 pb-4">
+          <div className="flex gap-5 overflow-x-auto scrollbar-hide px-4 pb-4 cursor-pointer">
             {ProductsData.map((data) => (
               <div
                 key={data.id}

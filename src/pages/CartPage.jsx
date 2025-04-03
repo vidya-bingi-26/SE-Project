@@ -91,7 +91,7 @@ const CartPage = () => {
                             Save for later
                           </button>
                           <button
-                            onClick={() => removeFromCart(product.id)}
+                            onClick={() => removeFromCart(product)}
                             className="text-red-500 hover:text-red-700"
                           >
                             <FaTrash />
@@ -133,7 +133,7 @@ const CartPage = () => {
                           Move to cart
                         </button>
                         <button
-                          onClick={() => removeFromSaved(product.id)}
+                          onClick={() => removeFromSaved(product)}
                           className="text-red-500 hover:text-red-700"
                         >
                           <FaTrash />

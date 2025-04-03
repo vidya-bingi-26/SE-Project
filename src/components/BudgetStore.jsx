@@ -10,7 +10,7 @@ function BudgetStore() {
           {priceCategories.map((price, index) => (
             <div
               key={index}
-              className="bg-pink-200 border border-pink-500 text-pink-500 rounded-full font-medium w-20 h-20 flex flex-col items-center justify-center text-sm text-center leading-tight"
+              className="bg-pink-200 border border-pink-500 text-pink-500 rounded-full font-medium w-20 h-20 flex flex-col items-center justify-center text-sm text-center leading-tight cursor-pointer"
             >
               Under <br /> {price}
             </div>

@@ -1,17 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
-
-// Create Cart Context
 const CartContext = createContext();
 
-// Provide Cart State to the Whole App
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const [savedForLater, setSavedForLater] = useState([]);
-  const [toaster, setToaster] = useState({ show: false, message: "" });
 
-  // Load Cart & Saved Items from Local Storage
+  // Load from localStorage
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     const storedSaved = JSON.parse(localStorage.getItem("savedForLater")) || [];
@@ -19,37 +15,62 @@ export const CartProvider = ({ children }) => {
     setSavedForLater(storedSaved);
   }, []);
 
-  // Save Cart to Local Storage on Update
+  // Save to localStorage
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cart));
     localStorage.setItem("savedForLater", JSON.stringify(savedForLater));
   }, [cart, savedForLater]);
 
-  // Add item to cart
   const addToCart = (product) => {
-    setCart((prev) => [...prev, product]);
-    showToaster(`${product.name} added to cart!`);
+    const toastId = `add-to-cart-${product.id}`;
+
+    setCart((prev) => {
+      const isProductInCart = prev.some((item) => item.id === product.id);
+      if (!isProductInCart) {
+        toast.success(`${product.name} added to cart!`, { id: toastId });
+        return [...prev, product];
+      } else {
+        toast.error(`${product.name} is already in your cart!`, {
+          id: toastId,
+        });
+        return prev;
+      }
+    });
   };
 
-  const showToaster = (message) => {
-    setToaster({ show: true, message });
+  const removeFromCart = (product) => {
+    const toastId = `remove-from-cart-${product.id}`;
+
+    setCart((prev) => {
+      const newCart = prev.filter((item) => item.id !== product.id);
+      if (newCart.length < prev.length) {
+         toast.error(`${product.name} removed from cart!`,{id:toastId});
+      }
+      return newCart;
+    });
   };
 
-  const hideToaster = () => {
-    setToaster({ show: false, message: "" });
-  };
-
-
-  // Remove from Cart and Save for Later
   const saveForLater = (product) => {
     setCart((prev) => prev.filter((item) => item.id !== product.id));
     setSavedForLater((prev) => [...prev, product]);
+    toast.success(`${product.name} saved for later!`);
   };
 
-  // Move Back to Cart
   const moveToCart = (product) => {
     setSavedForLater((prev) => prev.filter((item) => item.id !== product.id));
     setCart((prev) => [...prev, product]);
+    toast.success(`${product.name} moved to cart!`);
+  };
+
+  const removeFromSaved = (product) => {
+    const toastId=`remove-from-saved-${product.id}`;
+    setSavedForLater((prev) => {
+      const newSaved = prev.filter((item) => item.id !== product.id);
+      if (newSaved.length < prev.length) {
+        toast.error(`${product.name} removed from saved items!`,{id:toastId});
+      }
+      return newSaved;
+    });
   };
 
   return (
@@ -58,22 +79,17 @@ export const CartProvider = ({ children }) => {
         cart,
         savedForLater,
         addToCart,
+        removeFromCart,
         saveForLater,
         moveToCart,
-        toaster,
-        showToaster,
-        hideToaster,
+        removeFromSaved,
+        setSavedForLater,
       }}
     >
       {children}
-      <Toaster
-        message={toaster.message}
-        show={toaster.show}
-        onClose={hideToaster}
-      />
+      
     </CartContext.Provider>
   );
 };
 
-// Hook to Use Cart Context
 export const useCart = () => useContext(CartContext);

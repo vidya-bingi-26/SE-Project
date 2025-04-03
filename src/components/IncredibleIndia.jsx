@@ -14,7 +14,7 @@ const StateCard = ({ state, hoveredState, setHoveredState }) => {
         setCurrentImageIndex(
           (prevIndex) => (prevIndex + 1) % state.images.length
         );
-      }, 5000); // Increased from 2500 to 3500ms (3.5 seconds)
+      }, 5000);
     }
 
     return () => {
@@ -24,7 +24,7 @@ const StateCard = ({ state, hoveredState, setHoveredState }) => {
 
   return (
     <div
-      className={`${state.colors} border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col`}
+      className={`${state.colors} border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col flex-shrink-0 w-[350px] h-full`}
       onMouseEnter={() => {
         setHoveredState(state.id);
         setIsHovered(true);
@@ -36,14 +36,12 @@ const StateCard = ({ state, hoveredState, setHoveredState }) => {
       }}
     >
       <div className="relative w-full pt-[56.25%]">
-        {" "}
-        {/* 16:9 Aspect Ratio Container */}
         <div
           className="absolute inset-0 overflow-hidden"
           style={{
             transform: `translateX(-${currentImageIndex * 100}%)`,
             width: `${state.images.length * 100}%`,
-            transition: "transform 4s ease-in-out", // Changed duration to 1s and added ease-in-out
+            transition: "transform 4s ease-in-out",
           }}
         >
           {state.images.map((img, idx) => (
@@ -98,11 +96,7 @@ const IncredibleIndia = () => {
     {
       id: 1,
       name: "Rajasthan",
-      images: [
-        `${rajasthan}?v=${new Date().getTime()}`,
-        "https://images.unsplash.com/photo-1586023492129-3d6667e7a1bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-      ],
+      images: [`${rajasthan}?v=${new Date().getTime()}`],
       products:
         "Blue Pottery • Meenakari Jewelry • Bandhani Textiles • Kathputli Puppets",
       colors: "bg-amber-100 border-amber-200",
@@ -110,14 +104,41 @@ const IncredibleIndia = () => {
     {
       id: 2,
       name: "Kashmir",
-      images: [
-        `${kashmir}?v=${new Date().getTime()}`,
-        "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-        "https://images.unsplash.com/photo-1589561253898-768105ca91a8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80",
-      ],
+      images: [`${kashmir}?v=${new Date().getTime()}`],
       products:
         "Pashmina Shawls • Kashmiri Carpets • Paper Mache • Walnut Wood Carvings",
       colors: "bg-blue-50 border-blue-100",
+    },
+    {
+      id: 3,
+      name: "Rajasthan",
+      images: [`${rajasthan}?v=${new Date().getTime()}`],
+      products:
+        "Blue Pottery • Meenakari Jewelry • Bandhani Textiles • Kathputli Puppets",
+      colors: "bg-amber-100 border-amber-200",
+    },
+    {
+      id: 4,
+      name: "Kashmir",
+      images: [`${kashmir}?v=${new Date().getTime()}`],
+      products:
+        "Pashmina Shawls • Kashmiri Carpets • Paper Mache • Walnut Wood Carvings",
+      colors: "bg-blue-50 border-blue-100",
+    },
+    {
+      id: 5,
+      name: "Gujarat",
+      images: [`${rajasthan}?v=${new Date().getTime()}`],
+      products: "Patola Silk • Bandhani • Kutch Embroidery • Wooden Furniture",
+      colors: "bg-green-50 border-green-100",
+    },
+    {
+      id: 6,
+      name: "Tamil Nadu",
+      images: [`${kashmir}?v=${new Date().getTime()}`],
+      products:
+        "Tanjore Paintings • Kanchipuram Silk • Bronze Icons • Chettinad Pottery",
+      colors: "bg-red-50 border-red-100",
     },
   ];
 
@@ -134,15 +155,17 @@ const IncredibleIndia = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {states.map((state) => (
-            <StateCard
-              key={state.id}
-              state={state}
-              hoveredState={hoveredState}
-              setHoveredState={setHoveredState}
-            />
-          ))}
+        <div className="relative">
+          <div className="flex space-x-6 pb-6 overflow-x-auto scrollbar-hide">
+            {states.map((state) => (
+              <StateCard
+                key={state.id}
+                state={state}
+                hoveredState={hoveredState}
+                setHoveredState={setHoveredState}
+              />
+            ))}
+          </div>
         </div>
 
         <div className="mt-12 text-center">

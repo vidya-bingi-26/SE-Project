@@ -1,4 +1,5 @@
 import React from "react";
+import toast, { Toaster } from "react-hot-toast";
 
 const Discounts = () => {
   const coupons = [
@@ -39,7 +40,7 @@ const Discounts = () => {
 
   const copyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
-    // Add toast notification here if needed
+    toast.success(`Code Copied to Clipboard`);
   };
 
   return (

@@ -3,6 +3,7 @@ import Image1 from "../../assets/hero/shopping.png";
 import Image2 from "../../assets/hero/women.png";
 import Image3 from "../../assets/hero/sale.png";
 import Slider from "react-slick";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ImageList = [
   {
@@ -26,6 +27,8 @@ const ImageList = [
 ];
 
 const Hero = ({ handleOrderPopup }) => {
+  const navigate=useNavigate();
+  
   const settings = {
     dots: false,
     arrows: false,
@@ -74,7 +77,7 @@ const Hero = ({ handleOrderPopup }) => {
                     data-aos-delay="300"
                   >
                     <button
-                      onClick={handleOrderPopup}
+                      onClick={()=>navigate("/products")}
                       className="bg-gradient-to-r from-primary to-secondary hover:scale-105 duration-200 text-white py-2 px-4 rounded-full"
                     >
                       Shop Now
