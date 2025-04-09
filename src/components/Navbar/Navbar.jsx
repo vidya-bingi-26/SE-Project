@@ -6,6 +6,7 @@ import { FaCaretDown } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import { Link,useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
+import ONDCLogo from "../../assets/brands/ONDC Logo.png";
 
 const Menu = [
   { id: 1, name: "All", link: "/products" },
@@ -42,15 +43,15 @@ const CartButton = () => {
 
 const Navbar = () => {
   return (
-    <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 relative z-40">
+    <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 z-40 sticky top-0">
       {/* Upper Navbar */}
-      <div className="bg-primary/40 py-2">
+      <div className="bg-white py-2 shadow-slate-500">
         <div className="container flex justify-between items-center">
           <div>
             {/* Navigate Logo to Landing Page */}
             <Link to="/" className="font-bold text-2xl sm:text-3xl flex gap-2">
-              <img src={Logo} alt="Logo" className="w-10" />
-              Shopsy
+              <img src={Logo} alt="Logo" className="w-auto h-10 " />
+              
             </Link>
           </div>
 
@@ -68,17 +69,18 @@ const Navbar = () => {
             {/* Cart Button */}
             <CartButton />
 
-            {/* Darkmode Switch */}
+            
             
             <div className="h-full w-auto">
               <RxAvatar size={35} />
             </div>
+            <img src={ONDCLogo} className="h-10 w-auto"/>
           </div>
         </div>
       </div>
 
       {/* Lower Navbar */}
-      <div className="flex justify-center">
+      <div className="flex justify-center bg-slate-100">
         <ul className="sm:flex hidden items-center gap-4">
           {Menu.map((data) => (
             <li key={data.id}>
