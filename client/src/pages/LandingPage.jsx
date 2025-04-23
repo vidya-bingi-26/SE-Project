@@ -1,13 +1,13 @@
 import React from "react";
 import Navbar from "../components/Navbar/Navbar.jsx";
-import Hero from "../components/Hero/Hero";
-import Products from "../components/Products/Products";
+import Hero from "../components/Hero/Hero.jsx";
+import Products from "../components/Products/Products.jsx";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import Banner from "../components/Banner/Banner";
+import Banner from "../components/Banner/Banner.jsx";
 import Discounts from "../components/Subscribe/Discounts.jsx";
-import Testimonials from "../components/Testimonials/Testimonials";
-import Footer from "../components/Footer/Footer";
+import Testimonials from "../components/Testimonials/Testimonials.jsx";
+import Footer from "../components/Footer/Footer.jsx";
 import BudgetStore from "../components/BudgetStore.jsx";
 import IncredibleIndia from "../components/IncredibleIndia.jsx";
 

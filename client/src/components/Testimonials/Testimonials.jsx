@@ -4,26 +4,26 @@ import Slider from "react-slick";
 const TestimonialData = [
   {
     id: 1,
-    name: "Victor",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Amit Sharma",
+    text: "I had a great experience using the buyer app. The products are genuine and delivery was right on time!",
     img: "https://picsum.photos/101/101",
   },
   {
     id: 2,
-    name: "Satya Nadella",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Neha Verma",
+    text: "Very useful app! The products are long-lasting and the customer support is really responsive.",
     img: "https://picsum.photos/102/102",
   },
   {
     id: 3,
-    name: "Virat Kohli",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    name: "Ravi Kumar",
+    text: "Excellent quality and user-friendly interface. I could easily track my orders and find great deals.",
     img: "https://picsum.photos/104/104",
   },
   {
-    id: 5,
-    name: "Sachin Tendulkar",
-    text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque reiciendis inventore iste ratione ex alias quis magni at optio",
+    id: 4,
+    name: "Pooja Rani",
+    text: "Loved the experience! Affordable prices, and the items arrived in great condition. Highly recommend it.",
     img: "https://picsum.photos/103/103",
   },
 ];

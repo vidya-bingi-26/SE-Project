@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Logo from "../../assets/logo.png";
 import { IoMdSearch } from "react-icons/io";
 import { FaCartShopping } from "react-icons/fa6";
 import { FaCaretDown } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../../context/CartContext";
 import ONDCLogo from "../../assets/brands/ONDC Logo.png";
+
 
 const Menu = [
   { id: 1, name: "All", link: "/products" },
@@ -21,6 +22,15 @@ const DropdownLinks = [
   { id: 2, name: "Best Selling", link: "/#" },
   { id: 3, name: "Top Rated", link: "/#" },
 ];
+
+const getInitials = (name) => {
+  if (!name) return "";
+  const nameParts = name.trim().split(" ");
+  return nameParts
+    .map((n) => n[0].toUpperCase())
+    .join("")
+    .slice(0, 2);
+};
 
 const CartButton = () => {
   const navigate = useNavigate();
@@ -42,6 +52,33 @@ const CartButton = () => {
 };
 
 const Navbar = () => {
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+  const navigate = useNavigate();
+
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userInfo"); // Clear user data from local storage
+    navigate("/"); // Redirect to login page after logging out
+  };
+
+  // Close the dropdown if clicked outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const user = JSON.parse(localStorage.getItem("userInfo"));
+
   return (
     <div className="shadow-md bg-white dark:bg-gray-900 dark:text-white duration-200 z-40 sticky top-0">
       {/* Upper Navbar */}
@@ -51,7 +88,6 @@ const Navbar = () => {
             {/* Navigate Logo to Landing Page */}
             <Link to="/" className="font-bold text-2xl sm:text-3xl flex gap-2">
               <img src={Logo} alt="Logo" className="w-auto h-10 " />
-              
             </Link>
           </div>
 
@@ -69,12 +105,60 @@ const Navbar = () => {
             {/* Cart Button */}
             <CartButton />
 
-            
-            
-            <div className="h-full w-auto">
-              <RxAvatar size={35} />
-            </div>
-            <img src={ONDCLogo} className="h-10 w-auto"/>
+            {/* Avatar Section */}
+            {user ? (
+              <div className="relative">
+                <div
+                  className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-bold text-sm cursor-pointer"
+                  onClick={toggleDropdown}
+                >
+                  {getInitials(user.name)}
+                </div>
+                {dropdownOpen && (
+                  <div
+                    ref={dropdownRef}
+                    className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border border-gray-200 z-10"
+                  >
+                    <button
+                      onClick={handleLogout}
+                      className="w-full px-4 py-2 text-red-600 hover:bg-gray-100 text-left"
+                    >
+                      🚪 Logout
+                    </button>
+                    <button
+                      onClick={() => navigate("/profile")}
+                      className="w-full px-4 py-2 text-gray-800 hover:bg-gray-100 text-left"
+                    >
+                      👤 My Profile
+                    </button>
+                    <button
+                      onClick={() => navigate("/orders")}
+                      className="w-full px-4 py-2 text-gray-800 hover:bg-gray-100 text-left"
+                    >
+                      🧾 My Orders
+                    </button>
+                    <button
+                      onClick={() => navigate("/wishlist")}
+                      className="w-full px-4 py-2 text-gray-800 hover:bg-gray-100 text-left"
+                    >
+                      ❤️ Wishlist
+                    </button>
+                    <button
+                      onClick={() => navigate("/settings")}
+                      className="w-full px-4 py-2 text-gray-800 hover:bg-gray-100 text-left"
+                    >
+                      ⚙️ Settings
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <Link to="/authentication" className="h-full w-auto">
+                <RxAvatar size={35} />
+              </Link>
+            )}
+
+            <img src={ONDCLogo} className="h-10 w-auto" />
           </div>
         </div>
       </div>
