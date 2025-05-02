@@ -16,7 +16,6 @@ import Img13 from "../../assets/categories/health.png";
 import { Navigate, useNavigate } from "react-router-dom";
 import BASE_URL from "../../utils/api";
 
-
 const ProductsData = [
   {
     id: 1,
@@ -111,7 +110,6 @@ const ProductsData = [
   },
 ];
 
-
 const Products = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState(""); // To store selected category
@@ -131,7 +129,6 @@ const Products = () => {
     const encodedCategory = encodeURIComponent(category);
     navigate(`/category/${encodedCategory}`);
   };
-
 
   // Filter products based on the selected category
   const filteredProducts = selectedCategory
@@ -179,19 +176,20 @@ const Products = () => {
 
         {/* Display filtered products */}
         <div className="mt-8 grid grid-cols-3 gap-8">
-          {filteredProducts.map((product) => (
-            <div
-              key={product.id}
-              className="flex flex-col items-center space-y-2"
-            >
-              <img
-                src={product.img}
-                alt={product.title}
-                className="h-[200px] w-[150px] object-cover rounded-md"
-              />
-              <h3 className="text-sm font-semibold">{product.title}</h3>
-            </div>
-          ))}
+          {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
+            filteredProducts.map((product) => (
+              <div key={product.id} className="flex flex-col items-center space-y-2">
+                <img
+                  src={product.img}
+                  alt={product.title}
+                  className="h-[200px] w-[150px] object-cover rounded-md"
+                />
+                <h3 className="text-sm font-semibold">{product.title}</h3>
+              </div>
+            ))
+          ) : (
+            <p>No products available</p>
+          )}
         </div>
       </div>
     </div>

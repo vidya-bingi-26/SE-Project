@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "dev": "nodemon -r dotenv/config --experimental-json-modules src/index.js"
+    "dev": "nodemon -r dotenv/config --experimental-json-modules index.js"
   },
   "dependencies": {
     "@faker-js/faker": "github:faker-js/faker",
@@ -12,6 +12,16 @@
     "faker": "^6.6.6",
     "faker-js": "^1.0.0",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.13.2"
-  }
+    "mongoose": "^8.14.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
